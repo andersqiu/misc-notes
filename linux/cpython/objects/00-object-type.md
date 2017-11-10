@@ -88,3 +88,114 @@
   
   `PyTypeObject` is the **class** concept of all Python objects. Every object has a **type**, even `PyTypeObject` itself. Meanwhile, any `PyTypeObject` is a `PyVarObject`. 
   A tricky question: What is the type of a type object? The answer is `PyType_Type`.
+
+* PyHeapTypeObject (`./Include/object.h:349`)
+  ```
+  typedef struct _heaptypeobject {
+      PyTypeObject ht_type;
+      PyNumberMethods as_number;
+      PyMappingMethods as_mapping;
+      PySequenceMethods as_sequence;
+      PyBufferProcs as_buffer;
+      PyObject *ht_name, *ht_slots;
+  } PyHeapTypeObject;
+  ```
+
+  The `PyHeapTypeObject` is the extension of `PyTypeObject`.
+
+* PyType_Type (`./Objects/typeobject.c:2352`)
+  ```
+  PyTypeObject PyType_Type = {
+      1, &PyType_Type,
+      0,
+      "type",
+      sizeof(PyHeapTypeObject),
+      sizeof(PyMemberDef),
+      (destructor)type_dealloc,
+      0,
+      0,
+      0,
+      type_compare,
+      (reprfunc)type_repr,
+      0,
+      0,
+      0,
+      (hashfunc)_Py_HashPointer,
+      (ternaryfunc)type_call,
+      0,
+      (getattrofunc)type_getattro,
+      (setattrofunc)type_setattro,
+      0,
+      ( (1L<<0) | (1L<<1) | (1L<<3) | (1L<<5) | (1L<<6) | (1L<<7) | (1L<<8) | 0 | (1L<<17) | 0) | (1L<<14) |
+        (1L<<10),
+      type_doc,
+      (traverseproc)type_traverse,
+      (inquiry)type_clear,
+      0,
+       __builtin_offsetof (PyTypeObject, tp_weaklist),
+      0,
+      0,
+      type_methods,
+      type_members,
+      type_getsets,
+      0,
+      0,
+      0,
+      0,
+      __builtin_offsetof (PyTypeObject, tp_dict),
+      0,
+      0,
+      type_new,
+      PyObject_GC_Del,
+      (inquiry)type_is_gc,
+  };
+  ```
+  
+  `PyType_Type` is the meta class of all Python class objects. That is `PyType_Type` is the type of all `PyTypeObject` objects. It stands for the `type` object in Python.
+
+* PyBaseObject_Type (`./Objects/typeobject.c:2887`)
+  ```
+  PyTypeObject PyBaseObject_Type = {
+      1, &PyType_Type,
+      0,
+      "object",
+      sizeof(PyObject),
+      0,
+      object_dealloc,
+      0,
+      0,
+      0,
+      0,
+      object_repr,
+      0,
+      0,
+      0,
+      object_hash,
+      0,
+      object_str,
+      PyObject_GenericGetAttr,
+      PyObject_GenericSetAttr,
+      0,
+      ( (1L<<0) | (1L<<1) | (1L<<3) | (1L<<5) | (1L<<6) | (1L<<7) | (1L<<8) | 0 | (1L<<17) | 0) | (1L<<10),
+      "The most base type",
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      object_methods,
+      0,
+      object_getsets,
+      0,
+      0,
+      0,
+      0,
+      0,
+      object_init,
+      PyType_GenericAlloc,
+      object_new,
+      PyObject_Free,
+  };
+  ```
+  `PyBaseObject_Type` is the super class of all builtin types, it stands for the `object` object in Python.
