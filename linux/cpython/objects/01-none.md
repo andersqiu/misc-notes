@@ -42,7 +42,7 @@ CPython `None` object inside
   }
   ```
 
-* _Py_NoneStruct (`./Objects/object.c:`)
+* _Py_NoneStruct (`./Objects/object.c:1836`)
   ```
   PyObject _Py_NoneStruct = {
       1, &PyNone_Type,
