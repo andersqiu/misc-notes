@@ -20,7 +20,7 @@
   typedef struct {
       Py_ssize_t ob_refcnt;
       struct _typeobject *ob_type;
-      Py_ssize_t ob_size;
+      Py_ssize_t ob_size; /* Number of items in variable part */
   } PyVarObject;
   ```
 
@@ -32,9 +32,10 @@
       Py_ssize_t ob_refcnt;
       struct _typeobject *ob_type;
       Py_ssize_t ob_size;
-      const char *tp_name;
-      Py_ssize_t tp_basicsize, tp_itemsize;
+      const char *tp_name;  /* For printing, in format "<module>.<name>" */
+      Py_ssize_t tp_basicsize, tp_itemsize; /* For allocation */
 
+      /* Methods to implement standard operations */
       destructor tp_dealloc;
       printfunc tp_print;
       getattrfunc tp_getattr;
@@ -42,28 +43,42 @@
       cmpfunc tp_compare;
       reprfunc tp_repr;
 
+      /* Method suites for standard classes */
       PyNumberMethods *tp_as_number;
       PySequenceMethods *tp_as_sequence;
       PyMappingMethods *tp_as_mapping;
 
+      /* More standard operations (here for binary compatibility) */
       hashfunc tp_hash;
       ternaryfunc tp_call;
       reprfunc tp_str;
       getattrofunc tp_getattro;
       setattrofunc tp_setattro;
 
+      /* Functions to access object as input/output buffer */
       PyBufferProcs *tp_as_buffer;
-      long tp_flags;
-      const char *tp_doc;
       
+      long tp_flags; /* Flags to define presence of optional/expanded features */
+      const char *tp_doc; /* Documentation string */
+
+      /* Assigned meaning in release 2.0 */
+      /* call function for all accessible objects */
       traverseproc tp_traverse;
-      inquiry tp_clear;
+
+      inquiry tp_clear; /* delete references to contained objects */
+
+      /* Assigned meaning in release 2.1 */
+      /* rich comparisons */
       richcmpfunc tp_richcompare;
 
-      Py_ssize_t tp_weaklistoffset;
+      Py_ssize_t tp_weaklistoffset; /* weak reference enabler */
+
+      /* Added in release 2.2 */
+      /* Iterators */
       getiterfunc tp_iter;
       iternextfunc tp_iternext;
 
+      /* Attribute descriptor and subclassing stuff */
       struct PyMethodDef *tp_methods;
       struct PyMemberDef *tp_members;
       struct PyGetSetDef *tp_getset;
@@ -75,10 +90,10 @@
       initproc tp_init;
       allocfunc tp_alloc;
       newfunc tp_new;
-      freefunc tp_free;
-      inquiry tp_is_gc;
+      freefunc tp_free; /* Low-level free-memory routine */
+      inquiry tp_is_gc; /* For PyObject_IS_GC */
       PyObject *tp_bases;
-      PyObject *tp_mro;
+      PyObject *tp_mro; /* method resolution order */
       PyObject *tp_cache;
       PyObject *tp_subclasses;
       PyObject *tp_weaklist;
