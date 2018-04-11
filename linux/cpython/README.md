@@ -2,7 +2,7 @@
 CPython source code study notes
 
 ## CPython version
-All the research is based on CPython **2.5.6** and above. CPython 2.7, 3.0 and high versions will be covered later.
+All the research is based on CPython **2.5.6** and above. CPython 2.7, 3.0 and higher versions will be covered later.
 
 ## Subjects
 * [Environments](./00-env.md)
