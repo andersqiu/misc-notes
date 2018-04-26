@@ -1,2 +1,2 @@
 # Introduction
-Fedora Linux tricks
+Fedora Linux tips
