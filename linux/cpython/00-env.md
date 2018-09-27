@@ -1,5 +1,5 @@
 # CPython study environments
-* CentOS 6.9 i386
+* CentOS 6.10 i686
 * GCC 4.4.7
 
 ## Build CPython
