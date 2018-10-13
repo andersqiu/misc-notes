@@ -6,7 +6,7 @@ import os
 
 ALIYUN_PIP_CONFIG = \
 '''[global] 
-index-url = http://mirrors.aliyun.com/pypi/simple/ 
+index-url = https://mirrors.aliyun.com/pypi/simple/ 
 
 [install] 
 trusted-host=mirrors.aliyun.com 
@@ -15,12 +15,14 @@ trusted-host=mirrors.aliyun.com
 def add_pip_config_file():
     '''Add Aliyun mirrros for the pip configuration.
     '''
-    pip_dir = os.path.join(os.path.expanduser('~'), '.pip')
+    pip_dirname = '.pip'
     pip_name = 'pip.conf'
-    platform = sys.platform;
+    platform = sys.platform
     if platform == 'win32':
+        pip_dirname = 'pip'
         pip_name = 'pip.ini'
     
+    pip_dir = os.path.join(os.path.expanduser('~'), pip_dirname)
     pip_file = os.path.join(pip_dir, pip_name)
     
     if not os.path.exists(pip_dir):
