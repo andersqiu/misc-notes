@@ -26,12 +26,22 @@ def add_pip_config_file():
     pip_file = os.path.join(pip_dir, pip_name)
     
     if not os.path.exists(pip_dir):
+        print('Generating directory %s...' % pip_dir)
         os.mkdir(pip_dir)
+        print('Directory %s generated.' % pip_dir)
+    else:
+        print('Pip configuration directory %s found.' % pip_dir)
 
     if not os.path.exists(pip_file):
+        print('Generating pip configuration file %s...' % pip_file)
         with open(pip_file, 'w') as fp:
             fp.write(ALIYUN_PIP_CONFIG)
+        print('Pip configuration file %s generated.' % pip_file)
+    else:
+        print('Pip configuration file %s found, skip generating it.' % 
+		pip_file)
 
 
 if __name__ == '__main__':
     add_pip_config_file()
+    print('Done.');
