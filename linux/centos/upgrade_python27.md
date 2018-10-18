@@ -13,3 +13,8 @@ $ make
 $ sudo make install
 ```
 
+## Configuration
+```
+$ sudo sh -c "echo /usr/local/lib > /etc/ld.so.conf.d/python27.conf"
+$ sudo ldconfig
+```
