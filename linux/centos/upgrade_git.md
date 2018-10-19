@@ -10,6 +10,7 @@ How to upgrade git from 1.7.1 to 2.19.1
 $ sudo yum install dh-autoreconf curl-devel expat-devel gettext-devel \
   openssl-devel perl-devel zlib-devel
 $ sudo yum install asciidoc xmlto
+$ sudo yum install perl-XML-SAX texinfo
 $ sudo rpm -vi docbook2x-0.8.8-1.el6.rf.i686.rpm
 $ sudo ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi
 
