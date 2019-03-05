@@ -1,0 +1,10 @@
+cflags = -Wall
+
+rule cc
+  command = gcc $cflags -c $in -o $out
+
+rule link
+  command = gcc -o $out $in
+
+build hello.o: cc hello.c
+build hello: link hello.o
