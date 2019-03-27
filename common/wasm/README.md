@@ -29,4 +29,11 @@ $ emcc hello.c -s WASM=1 -o hello.html
 $ emrun --no_browser --port 8080 .
 ```
 
-Open the browser, go to `http://127.0.0.1:8080/hello.html`
+Open the browser, go to `http://127.0.0.1:8080/hello.html`.
+
+## Run wasm with minimal code
+### Browser
+Please go to the browser directory and follow the [README](./browser/README.md).
+
+### Node.js envrionment
+Please go to the node directory and follow the [README](./node/README.md).

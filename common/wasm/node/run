@@ -1,0 +1,4 @@
+#!/bin/bash
+
+make
+node runwasm.js add.wasm addTwo 2 2
