@@ -44,4 +44,4 @@ def add_pip_config_file():
 
 if __name__ == '__main__':
     add_pip_config_file()
-    print('Done.');
+    print('Done.')
