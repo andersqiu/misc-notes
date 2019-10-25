@@ -6,7 +6,7 @@ Add media repo from DVD iso
 * Run command
 ```
 # mkdir -pv /mnt/iso
-# mount -o loop /home/anders/Downloads/os/CentOS-8-x86_64-1905-dvd1.iso /mnt/iso
+# mount -o loop /opt/os/CentOS-8-x86_64-1905-dvd1.iso /mnt/iso
 # cp -v /mnt/iso/media.repo /etc/yum.repos.d/centos8.repo
 # cat /etc/yum.repos.d/centos8.repo
 [InstallMedia]
@@ -36,6 +36,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 # dnf config-manager --disable "extras"
 # dnf clean all
 ```
+
 * Check the added repo
 ```
 $ sudo dnf repolist
@@ -44,3 +45,20 @@ repo id                               repo name                           status
 InstallMedia-AppStream                CentOS 8 - AppStream                4,681
 InstallMedia-BaseOS                   CentOS 8 - BaseOS                   1,655
 ```
+
+* Mount the iso automatically after reboot
+```
+$ su -
+# vi /etc/fstab
+```
+
+Append this line to the file **/etc/fstab**
+```
+/opt/os/CentOS-8-x86_64-1905-dvd1.iso	/mnt/iso	iso9660 loop    0 0 
+```
+
+And then run this command to mount iso this time:
+```
+# mount -a
+```
+
