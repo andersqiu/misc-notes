@@ -21,8 +21,14 @@ def add_pip_config_file():
     if platform == 'win32':
         pip_dirname = 'pip'
         pip_name = 'pip.ini'
-    
-    pip_dir = os.path.join(os.path.expanduser('~'), pip_dirname)
+
+    # For Windows and macOS, the pip configuration file is at ~/.pip
+    # For Linux platform, the pip configration file should be /etc
+    # to take effect systematically.
+    if platform in ('win32', 'darwin'):
+        pip_dir = os.path.join(os.path.expanduser('~'), pip_dirname)
+    else:
+        pip_dir = os.getcwd()
     pip_file = os.path.join(pip_dir, pip_name)
     
     if not os.path.exists(pip_dir):
