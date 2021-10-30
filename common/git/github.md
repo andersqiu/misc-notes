@@ -4,7 +4,7 @@ How to set up github SSH config
 ## Generate SSH Keys
 ```
 $ ssh-keygen -t rsa -b 4096 -C "qiuzhong0917@gmail.com"
-$ ssh-key add ~/.ssh/id_rsa
+$ ssh-add ~/.ssh/id_rsa
 ```
 
 ## Copy the public key to github.com
