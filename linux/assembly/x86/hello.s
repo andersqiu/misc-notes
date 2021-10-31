@@ -8,7 +8,7 @@ _start:
 	movl $4, %eax
 	movl $1, %ebx
 	movl $hello_world, %ecx
-	movl $14, %edx
+	movl $13, %edx
 	int $0x80
 
 	movl $1, %eax
